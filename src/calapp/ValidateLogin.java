@@ -10,9 +10,24 @@ import java.sql.Statement;
 
 public class ValidateLogin {
 	public static void main(String[] args) {
+		System.out.println(checkPassword("swade", "password"));
+		
+	}
+	
+	
+	
+	
+	public static Boolean checkPassword(String userName, String password) {
 		UserDAO testDAO = new UserDAO();
-		User testUser = testDAO.getUser("swade");
-		System.out.println(testUser.password);
+		User testUser = testDAO.getUser(userName);
+		System.out.println(testUser.userName);
+		System.out.println(testUser.password + " == " + password);
+		if (password.equals(testUser.password)) {
+			return true;
+		}
+		else {
+			return false;
+		}
 		
 		
 	}

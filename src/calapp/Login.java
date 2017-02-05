@@ -55,6 +55,15 @@ public class Login extends Application{
 		primaryStage.setTitle("Customer Appointments");
 		primaryStage.setScene(scene);
 		primaryStage.show();
+		
+		//add action on button press
+		
+		btn.setOnAction(e -> {
+            String value1 = String.valueOf(userTextField.getText());
+            String value2 = String.valueOf(pwBox.getText());
+            System.out.println(ValidateLogin.checkPassword(value1, value2));
+            
+		});
 	}
 	
 
