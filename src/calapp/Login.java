@@ -1,9 +1,7 @@
 package calapp;
 
-import java.util.Locale;
-import javafx.scene.control.Dialog;
-import java.util.ResourceBundle;
 
+import java.util.ResourceBundle;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -20,9 +18,7 @@ public static void main(String[] args) {
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		Locale locale = Locale.getDefault();
-		//Locale.setDefault(locale);
-		System.out.println(locale);
+
 		ResourceBundle rb = ResourceBundle.getBundle("ApplicationResources");
 		//Set up the initial grid
 		GridPane grid = new GridPane();
@@ -75,19 +71,15 @@ public static void main(String[] args) {
 	        String value2 = String.valueOf(pwBox.getText());
 			Boolean validlogin = ValidateLogin.checkPassword(value1, value2);
 			if (validlogin == true) {
-				errorText.setText("Logged In");
-				System.out.println("You have logged in to the system");
+				errorText.setText(rb.getString("goodpass"));
 			}
 			else {
-				errorText.setText("Bad Password");
-				System.out.println("Invalid loging credentials");
+				errorText.setText(rb.getString("badpass"));	
 			}
-	        
-	        //System.out.println(ValidateLogin.checkPassword(value1, value2));
-			
+	
 		});
 		
-
+//  Watching this video  https://www.youtube.com/watch?v=RifjriAxbw8
 		
 		
 	}

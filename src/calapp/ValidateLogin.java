@@ -20,8 +20,6 @@ public class ValidateLogin {
 	public static Boolean checkPassword(String userName, String password) {
 		UserDAO testDAO = new UserDAO();
 		User testUser = testDAO.getUser(userName);
-		System.out.println(testUser.userName);
-		System.out.println(testUser.password + " == " + password);
 		if (password.equals(testUser.password)) {
 			return true;
 		}
@@ -47,7 +45,6 @@ class UserDAO {
 			Statement st = con.createStatement();
 			ResultSet rs = st.executeQuery(query);
 			rs.next();
-	//		String userName = rs.getString("1");
 			String password = rs.getString("password");
 			u.password = password;
 			return u;
@@ -55,7 +52,7 @@ class UserDAO {
 		}
 		catch (SQLException e) {
 			System.out.println(e);
-			//return u;
+
 		}
 		return null;
 	}
