@@ -19,7 +19,7 @@ public static void main(String[] args) {
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 
-		ResourceBundle rb = ResourceBundle.getBundle("ApplicationResources");
+		ResourceBundle rb = ResourceBundle.getBundle("calapp.ApplicationResources");
 		//Set up the initial grid
 		GridPane grid = new GridPane();
 		grid.setAlignment(Pos.CENTER);
@@ -30,7 +30,7 @@ public static void main(String[] args) {
 		//Add the grid to the Scene
 		Scene scene = new Scene(grid, 300, 275);
 		Text scenetitle = new Text(rb.getString("greeting"));
-		scenetitle.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
+		scenetitle.setFont(Font.font(java.util.ResourceBundle.getBundle("calapp/ApplicationResources").getString("TAHOMA"), FontWeight.NORMAL, 20));
 		grid.add(scenetitle, 0, 0, 2, 1);
 		
 		//Setup userName and Password Inputs
@@ -58,7 +58,7 @@ public static void main(String[] args) {
 		
 		//Starts the application
 		
-		primaryStage.setTitle("Customer Appointments");
+		primaryStage.setTitle(java.util.ResourceBundle.getBundle("calapp/ApplicationResources").getString("CUSTOMER APPOINTMENTS"));
 		primaryStage.setScene(scene);
 		primaryStage.show();
 		

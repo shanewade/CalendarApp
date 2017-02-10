@@ -14,7 +14,7 @@ import javafx.stage.Stage;
 public class Main {
 	public static void start(Stage primaryStage) throws Exception {
 
-		ResourceBundle rb = ResourceBundle.getBundle("ApplicationResources");
+		ResourceBundle rb = ResourceBundle.getBundle("calapp.ApplicationResources");
 		//Set up the initial grid
 		GridPane grid = new GridPane();
 		grid.setAlignment(Pos.CENTER);
