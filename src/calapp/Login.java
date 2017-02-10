@@ -72,6 +72,12 @@ public static void main(String[] args) {
 			Boolean validlogin = ValidateLogin.checkPassword(value1, value2);
 			if (validlogin == true) {
 				errorText.setText(rb.getString("goodpass"));
+				try {
+					Main.start(primaryStage);
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 			else {
 				errorText.setText(rb.getString("badpass"));	
