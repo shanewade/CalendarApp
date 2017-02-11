@@ -14,7 +14,7 @@ import javafx.fxml.Initializable;
  *
  * @author swade
  */
-public class MainDataEntryController implements Initializable {
+public class CustomerEntryFormController implements Initializable {
 
     /**
      * Initializes the controller class.
