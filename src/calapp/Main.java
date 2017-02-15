@@ -30,7 +30,7 @@ public class Main {
 		
 
 //		
-		primaryStage.setTitle("Customer Appointments - Main");
+		primaryStage.setTitle("Customer Appointments - Jo");
 		primaryStage.setScene(scene);
 		primaryStage.show();
 		

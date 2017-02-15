@@ -12,7 +12,7 @@ import javafx.scene.text.*;
 import javafx.stage.*;
 
 public class Login extends Application{
-public static void main(String[] args) {
+public static void oldmain(String[] args) {
 		launch(args);
 	}
 
