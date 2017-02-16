@@ -21,11 +21,11 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Label prefHeight="17.0" prefWidth="68.0" text="%username" textAlignment="CENTER" GridPane.rowIndex="1" />
-            <Label alignment="CENTER" text="Password" textAlignment="CENTER" GridPane.rowIndex="2" />
-            <TextField fx:id="username" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <Button alignment="CENTER" mnemonicParsing="false" onAction="#validateSignin" text="Button" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-            <Text fill="#e40505" nodeOrientation="LEFT_TO_RIGHT" strokeType="OUTSIDE" strokeWidth="0.0" text="Status" GridPane.columnIndex="1" />
+            <Label alignment="BASELINE_LEFT" prefHeight="17.0" prefWidth="120.0" text="%username" textAlignment="CENTER" GridPane.rowIndex="1" />
+            <Label alignment="BASELINE_LEFT" prefHeight="17.0" prefWidth="124.0" text="%password" textAlignment="CENTER" GridPane.rowIndex="2" />
+            <TextField fx:id="username" prefHeight="27.0" prefWidth="202.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Button alignment="CENTER" mnemonicParsing="false" onAction="#validateSignin" text="%login" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <Text fx:id="status" fill="#e40505" nodeOrientation="LEFT_TO_RIGHT" strokeType="OUTSIDE" strokeWidth="0.0" text="" GridPane.columnIndex="1" />
             <PasswordField fx:id="password" GridPane.columnIndex="1" GridPane.rowIndex="2" />
          </children>
       </GridPane>

@@ -12,6 +12,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 /**
@@ -24,7 +25,9 @@ public class SignInController implements Initializable {
     
     @FXML private TextField username;
     @FXML private TextField password;
-    @FXML private Label status;
+    @FXML private Text status;
+    
+    ResourceBundle rb = ResourceBundle.getBundle("calapp.ApplicationResources");
     
     @FXML
     private void validateSignin(ActionEvent ae) {
@@ -43,10 +46,15 @@ public class SignInController implements Initializable {
                         // TODO Auto-generated catch block
                         System.err.println(e1);
                 }
-        }
-        else{
-            System.err.println(status.getText());
-            //status.setText("Invalid Signin");
+        }if (pass.equals("")) {
+            //System.err.println(status.getText());
+            System.err.println("Invalid Signin");
+            status.setText(rb.getString("nopass"));
+        }else{
+            System.err.println(password.getText());
+            status.setText(rb.getString("badpass"));
+            username.setText("");
+            password.setText(""); 
         }
     }
     
