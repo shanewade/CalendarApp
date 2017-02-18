@@ -60,7 +60,7 @@ public class Control {
                 scene = new Scene(root);
                 stage.setScene(scene);
                 stage.setTitle("Calendar Application");
-                Maximizewindow();
+                //Maximizewindow();
                 stage.show();
             }
             else if (s.equals("custEntry")){
@@ -69,9 +69,18 @@ public class Control {
                 scene = new Scene(root);
                 stage.setScene(scene);
                 stage.setTitle("Calendar Application");
-                Maximizewindow();
+                //Maximizewindow();
                 stage.show();
-        }
+            }
+            else if (s.equals("newCust")){
+                Parent root = FXMLLoader.load(getClass().getResource("NewCustomer.fxml"));
+                stage.close();
+                scene = new Scene(root);
+                stage.setScene(scene);
+                stage.setTitle("Calendar Application");
+                //Maximizewindow();
+                stage.show();
+            }
         } catch (IOException ex) {
             Logger.getLogger(Control.class.getName()).log(Level.SEVERE, null, ex);
         }

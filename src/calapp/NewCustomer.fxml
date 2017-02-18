@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="calapp.NewCustomerController">
+   <top>
+      <Pane BorderPane.alignment="CENTER">
+         <children>
+            <Label layoutX="221.0" layoutY="11.0" text="New Customer Data Form">
+               <padding>
+                  <Insets bottom="5.0" />
+               </padding>
+            </Label>
+         </children>
+      </Pane>
+   </top>
+   <bottom>
+      <Pane BorderPane.alignment="CENTER">
+         <children>
+            <Button alignment="CENTER" contentDisplay="CENTER" layoutX="471.0" mnemonicParsing="false" text="Cancel" textAlignment="CENTER" />
+            <Button layoutX="541.0" mnemonicParsing="false" onAction="#saveNewCust" text="Save" />
+         </children>
+      </Pane>
+   </bottom>
+   <center>
+      <SplitPane dividerPositions="0.29797979797979796" prefHeight="160.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+        <items>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" />
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+               <children>
+                  <Label layoutX="29.0" layoutY="28.0" text="Name" />
+                  <Label layoutX="29.0" layoutY="57.0" text="Address" />
+                  <Label layoutX="29.0" layoutY="134.0" text="Phone #" />
+                  <Label layoutX="29.0" layoutY="165.0" text="City" />
+                  <Label layoutX="29.0" layoutY="196.0" text="Zipcode" />
+                  <TextField fx:id="custName" layoutX="131.0" layoutY="23.0" />
+                  <TextField fx:id="custAddress" layoutX="131.0" layoutY="55.0" prefHeight="68.0" prefWidth="167.0" />
+                  <TextField fx:id="custPhone" layoutX="131.0" layoutY="129.0" />
+                  <TextField fx:id="custCity" layoutX="131.0" layoutY="160.0" />
+                  <TextField fx:id="custZip" layoutX="131.0" layoutY="191.0" />
+                  <Label layoutX="29.0" layoutY="229.0" text="Country" />
+                  <TextField fx:id="custCountry" layoutX="131.0" layoutY="224.0" />
+               </children>
+            </AnchorPane>
+        </items>
+      </SplitPane>
+   </center>
+</BorderPane>

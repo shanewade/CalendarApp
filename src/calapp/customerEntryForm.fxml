@@ -7,8 +7,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
-<VBox alignment="TOP_RIGHT" nodeOrientation="RIGHT_TO_LEFT" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<VBox alignment="TOP_RIGHT" nodeOrientation="RIGHT_TO_LEFT" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="calapp.CustomerEntryFormController">
    <children>
       <SplitPane dividerPositions="0.7857142857142857" prefHeight="598.0" prefWidth="800.0">
         <items>
@@ -16,7 +15,7 @@
                <children>
                   <Button layoutX="67.0" layoutY="537.0" mnemonicParsing="false" text="Prev" />
                   <Button layoutX="136.0" layoutY="537.0" mnemonicParsing="false" text="Next" />
-                  <Button layoutX="547.0" layoutY="537.0" mnemonicParsing="false" text="New" />
+                  <Button layoutX="547.0" layoutY="537.0" mnemonicParsing="false" onAction="#launchNewCustomer" text="New" />
                   <Text layoutX="39.0" layoutY="43.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name" wrappingWidth="46.0" />
                   <Text layoutX="39.0" layoutY="127.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Address" />
                   <Text layoutX="228.0" layoutY="43.0" strokeType="OUTSIDE" strokeWidth="0.0" text="City" />

@@ -10,7 +10,6 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -43,7 +42,6 @@ public class SignInController implements Initializable {
                 c.SetPane("custEntry");             
 				
                 } catch (Exception e1) {
-                        // TODO Auto-generated catch block
                         System.err.println(e1);
                 }
         }if (pass.equals("")) {
