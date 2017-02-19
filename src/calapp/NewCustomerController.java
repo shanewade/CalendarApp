@@ -26,12 +26,17 @@ public class NewCustomerController implements Initializable {
     @FXML private TextField custCountry;
     
     @FXML private void saveNewCust(){
-        System.err.println(custName.getText());
-        System.err.println(custAddress.getText());
-        System.err.println(custPhone.getText());
-        System.err.println(custCity.getText());
-        System.err.println(custZip.getText());
-        System.err.println(custCountry.getText());
+//        
+        Customer newCust = new Customer (Customer.getNextCustID(), custName.getText(), 1, Customer.getCurrentOrGetNextCityID(custCity.getText()),Customer.getCurrentOrGetNextCountryID(custCountry.getText()), 1);
+        Customer.addNewCustomer(newCust.getCustid(newCust), newCust.getCustName(newCust), 1);
+        //(int id,String name, int addr, int city, int country, int phone )
+        Customer.printCustValues(newCust);
+//        System.err.println(custName.getText());
+//        System.err.println(custAddress.getText());
+//        System.err.println(custPhone.getText());
+//        System.err.println(custCity.getText());
+//        System.err.println(custZip.getText());
+//        System.err.println(custCountry.getText());
     }
     /**
      * Initializes the controller class.

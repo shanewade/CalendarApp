@@ -25,3 +25,7 @@ VALUES ('1', '123 Main Street', NULL, '2', '46248', '123-555-1212', '2017-02-11 
 INSERT INTO `customer` (`customerID`, `customerName`, `addressID`, `active`, `createDate`, `createdBy`, `lastUpdate`, `lastUpdatedBy`) 
 VALUES ('1', 'Joe Duncan', '1', '1', '2017-02-11 00:00:00', 'swade', NULL, NULL), 
 ('2', 'Sandy Cheeks', '2', '1', '2017-02-11 00:00:00', 'swade', NULL, NULL);
+
+
+INSERT INTO `customer` (`customerID`, `customerName`, `addressID`, `active`, `createDate`, `createdBy`) 
+VALUES ('99', 'ButtHead CircleJeans', '1', '1', '2017-02-11 00:00:00', 'swade');
