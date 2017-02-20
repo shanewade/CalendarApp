@@ -10,7 +10,12 @@ package calapp;
  * @author swade
  */
 public class TestClass {
-//    public static void main(String[] args) {
+
+
+    public static void main(String[] args) {
+        String addressName = "310 Colorado Street";
+        int newAddressID = Address.addNewAddress(addressName, 3,"1112223333", "swade");
+        System.err.println(newAddressID);
 //      int testVal = Customer.getNextCustID();
 //      System.err.println(testVal);
 //      int testCountry = Customer.getCurrentOrGetNextCountryID("Mexico");
@@ -18,5 +23,5 @@ public class TestClass {
 //      int testCity = Customer.getCurrentOrGetNextCityID("Bufflo");
 //      System.err.println(testCity);
 //      Customer.addNewCustomer(99, "ButtHead CircleJeans", 1);
-//}
+}
 }

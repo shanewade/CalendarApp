@@ -8,6 +8,8 @@ package calapp;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.util.Calendar;
 
 /**
  *
@@ -61,15 +63,13 @@ public class Customer {
     }
     
     public static boolean addNewCustomer(int custID, String custName, int custAddrId) {
+        
+        Calendar calendar = Calendar.getInstance();
+        java.sql.Timestamp ts = new java.sql.Timestamp(calendar.getTime().getTime());
         String query = "INSERT INTO `customer` (`customerID`, `customerName`, `addressID`, `active`, `createDate`, `createdBy`) "
-                        + "VALUES ('" + custID +"', '"+ custName +"', '1', '1', '2017-02-11 00:00:00', 'swade');";
+                        + "VALUES ('" + custID +"', '"+ custName +"', '1', '1', '" +ts +"', '"+ValidateLogin.loggedInUser+"');";
         System.err.println(query);
         Boolean updated = DataConn.Update(query);
-        
-        
-//INSERT INTO `customer` (`customerID`, `customerName`, `addressID`, `active`, `createDate`, `createdBy`, `lastUpdate`, `lastUpdatedBy`) 
-//VALUES ('1', 'Joe Duncan', '1', '1', '2017-02-11 00:00:00', 'swade', NULL, NULL), 
-//('2', 'Sandy Cheeks', '2', '1', '2017-02-11 00:00:00', 'swade', NULL, NULL);
    return false;
     }
     
@@ -88,117 +88,16 @@ public class Customer {
     }
     
     
-    public static int getCurrentOrGetNextAddressID(String addressName) {
-        int addressId = getAddressID(addressName);
-        if ( addressId == 0){
-                    ResultSet rs = DataConn.Query("SELECT MAX(addressID) AS id FROM address;");
-        try {
-            rs.next();
-            int nextID = rs.getInt("id");
-            nextID++;
-            return nextID;
-        }
-        catch (SQLException e) {
-            System.err.println(e);
-        }
-        }
-        else {
-            return addressId;
-        }
-        
-        
-        return 0;
-    }
     
     
-    public static int getCurrentOrGetNextCountryID(String countryName) {
-        int countryId = getCountryID(countryName);
-        if ( countryId == 0){
-                    ResultSet rs = DataConn.Query("SELECT MAX(countryID) AS id FROM country;");
-        try {
-            rs.next();
-            int nextID = rs.getInt("id");
-            nextID++;
-            return nextID;
-        }
-        catch (SQLException e) {
-            System.err.println(e);
-        }
-        }
-        else {
-            return countryId;
-        }
-        
-        
-        return 0;
-    }
     
-    public static int getCurrentOrGetNextCityID(String cityName) {
-        int cityId = getCityID(cityName);
-        if ( cityId == 0){
-                    ResultSet rs = DataConn.Query("SELECT MAX(cityID) AS id FROM city;");
-        try {
-            rs.next();
-            int nextID = rs.getInt("id");
-            nextID++;
-            return nextID;
-        }
-        catch (SQLException e) {
-            System.err.println(e);
-        }
-        }
-        else {
-            return cityId;
-        }
-        
-        
-        return 0;
-    }
     
-    private static int getAddressID(String addressName){
-        String query =  "SELECT addressID AS id FROM address WHERE address = '" + addressName + "' ;";  
-        System.err.println(query);
-        ResultSet rs = DataConn.Query(query);
-            try {
-                rs.next();
-                int nextID = rs.getInt("id");
-                return nextID;
-        }
-        catch (SQLException e) {
-            System.err.println(e);
-        }
-        return 0; 
-    }    
+    
+    
+    
+    
 
 
 
-    private static int getCountryID(String countryName){
-        String query =  "SELECT countryID AS id FROM country WHERE country = '" + countryName + "' ;";  
-        System.err.println(query);
-        ResultSet rs = DataConn.Query(query);
-            try {
-                rs.next();
-                int nextID = rs.getInt("id");
-                return nextID;
-        }
-        catch (SQLException e) {
-            System.err.println(e);
-        }
-        return 0; 
-    }
-    
-    private static int getCityID(String cityName){
-        String query =  "SELECT cityID AS id FROM city WHERE city = '" + cityName + "' ;";  
-        System.err.println(query);
-        ResultSet rs = DataConn.Query(query);
-            try {
-                rs.next();
-                int nextID = rs.getInt("id");
-                return nextID;
-        }
-        catch (SQLException e) {
-            System.err.println(e);
-        }
-        return 0; 
-    }
+
 }
