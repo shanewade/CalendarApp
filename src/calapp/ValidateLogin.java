@@ -1,23 +1,24 @@
 package calapp;
 
-
-import java.sql.Connection;
-//import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import java.sql.Statement;
-
 public class ValidateLogin {
+    
+public User u;
 
-static String loggedInUser;
+public static String loggedInUser;
 
 	public static Boolean checkPassword(String userName, String password) {
 		UserDAO testDAO = new UserDAO();
 		User testUser = testDAO.getUser(userName);
 		if (password.equals(testUser.getPassword())) {
-		    loggedInUser = testUser.getUserName();
+		    //AppLauncher.loggedInUser = userName;
+                    GlobalDataStore gsd = GlobalDataStore.getInstance();
+                    gsd.setLoggedInUser(userName);
+                    
                     return true;
+                    
 		}
 		else {
 			return false;
@@ -36,7 +37,6 @@ class UserDAO {
             ResultSet rs= DataConn.Query(query);
             rs.next();
             String password = rs.getString("password");
-            System.err.println(password);
             u.setPassword(password);
             return u;
             } catch (SQLException e){

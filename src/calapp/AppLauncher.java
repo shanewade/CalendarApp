@@ -18,6 +18,7 @@ import java.util.ResourceBundle;
  * @author swade
  */
 public class AppLauncher extends Application {
+        GlobalDataStore gsd = GlobalDataStore.getInstance();
     
      @Override
     public void start(Stage stage) throws Exception {
@@ -33,8 +34,9 @@ public class AppLauncher extends Application {
     /**
      * @param args the command line arguments
      */
-//    public static void main(String[] args) {
-//        launch(args);
-//    }
+    public static void main(String[] args) {
+ 
+        launch(args);
+    }
     
 }

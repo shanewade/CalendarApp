@@ -27,10 +27,21 @@ public class NewCustomerController implements Initializable {
     
     @FXML private void saveNewCust(){
 //        
-        Customer newCust = new Customer (Customer.getNextCustID(), custName.getText(), 1, City.getCurrentOrGetNextCityID(custCity.getText())
-                                         ,Country.getCurrentOrGetNextCountryID(custCountry.getText()), 1);
-        Customer.addNewCustomer(newCust.getCustid(newCust), newCust.getCustName(newCust), 1);
-        Customer.printCustValues(newCust);
+        Customer newCust = new Customer (Customer.getNextCustID(), custName.getText(), Address.getCurrentOrGetNextAddressID(custAddress.getText()), City.getCurrentOrGetNextCityID(custCity.getText())
+                                         ,Country.getCurrentOrGetNextCountryID(custCountry.getText()), custPhone.getText() );
+        
+        if (Country.getCountryID(custCountry.getText())==0){
+            Country.addNewCountry(custCountry.getText());
+        }
+        
+        if (City.getCityID(custCity.getText())==0) {
+            City.addNewCity(custCity.getText(), Country.getCountryID(custCountry.getText()));
+        }
+        
+        
+        Address.addNewAddress(custAddress.getText(), custPhone.getText(), City.getCurrentOrGetNextCityID(custCity.getText()), custZip.getText());
+        
+        Customer.addNewCustomer(newCust.getCustid(newCust), newCust.getCustName(newCust),Address.getCurrentOrGetNextAddressID(custAddress.getText()));
     }
     /**
      * Initializes the controller class.

@@ -35,7 +35,6 @@ public class DataConn {
     public static boolean connectmysql() {
         
         String URL = "jdbc:mysql://" + address + "/" + database;
-        System.err.println(URL);
         try {
             DriverManager.registerDriver(new com.mysql.jdbc.Driver());
         } catch (SQLException e) {
@@ -55,9 +54,6 @@ public class DataConn {
         ResultSet rs;
         try {
             DataConn.connectmysql();
-            //conn = DataConn.getConnection();
-            System.err.println(conn);
-            System.err.println(q);
             Statement smt = conn.createStatement();
             rs = smt.executeQuery(q);
             return rs;
@@ -68,11 +64,9 @@ public class DataConn {
     }
     
     public static boolean Update(String q) {
-        System.out.println(q);
         try {
             Statement smt = conn.createStatement();
             int executeUpdate = smt.executeUpdate(q);
-            System.out.println(executeUpdate + " rows changed");
             return true;
         } catch (SQLException e) {
             System.out.println(e);

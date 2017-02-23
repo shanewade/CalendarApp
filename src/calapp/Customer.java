@@ -20,11 +20,11 @@ public class Customer {
     private int custId;
     private int custCityID;
     private int custCountryID;
-    private int custPhone;
+    private String custPhone;
     private String custName;
     private int custAddress;
     
-    Customer (int id,String name, int addr, int city, int country, int phone ) {
+    Customer (int id,String name, int addr, int city, int country, String phone ) {
         custId = id;
         custName = name;
         custAddress = addr;
@@ -54,21 +54,14 @@ public class Customer {
         custCountryID = id;
     }
     
-    public static void printCustValues(Customer c) {
-        System.err.println(c.custId);
-        System.err.println(c.custName);
-        System.err.println(c.custAddress);
-        System.err.println(c.custCountryID);
-        System.err.println(c.custCityID);
-    }
     
     public static boolean addNewCustomer(int custID, String custName, int custAddrId) {
-        
+        GlobalDataStore gsd = GlobalDataStore.getInstance();
+        String loggedInUser = gsd.getLoggedInUser();
         Calendar calendar = Calendar.getInstance();
         java.sql.Timestamp ts = new java.sql.Timestamp(calendar.getTime().getTime());
         String query = "INSERT INTO `customer` (`customerID`, `customerName`, `addressID`, `active`, `createDate`, `createdBy`) "
-                        + "VALUES ('" + custID +"', '"+ custName +"', '1', '1', '" +ts +"', '"+ValidateLogin.loggedInUser+"');";
-        System.err.println(query);
+                        + "VALUES ('" + custID +"', '"+ custName +"', '"+custAddrId+"', '1', '" +ts +"', '"+loggedInUser+"');";
         Boolean updated = DataConn.Update(query);
    return false;
     }

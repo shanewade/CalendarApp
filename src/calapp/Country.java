@@ -16,12 +16,12 @@ import java.util.Calendar;
 public class Country {
         public static int getCountryID(String countryName){
         String query =  "SELECT countryID AS id FROM country WHERE country = '" + countryName + "' ;";  
-        System.err.println(query);
         ResultSet rs = DataConn.Query(query);
             try {
-                rs.next();
+                if (rs.next()){
                 int nextID = rs.getInt("id");
                 return nextID;
+                }
         }
         catch (SQLException e) {
             System.err.println(e);
@@ -48,14 +48,15 @@ public class Country {
         return 0;   
 }
         public static int addNewCountry(String countryName) {
-        String loggedInUser = ValidateLogin.loggedInUser;
+        
+            GlobalDataStore gsd = GlobalDataStore.getInstance();
+            String loggedInUser = gsd.getLoggedInUser();
             Calendar calendar = Calendar.getInstance();
-        int newCountryID = getCurrentOrGetNextCountryID(countryName);
-        java.sql.Timestamp ts = new java.sql.Timestamp(calendar.getTime().getTime());
-        String query = "INSERT INTO `country` (`country`, `countryID`,`createDate`, `createBy`) "
+            int newCountryID = getCurrentOrGetNextCountryID(countryName);
+            java.sql.Timestamp ts = new java.sql.Timestamp(calendar.getTime().getTime());
+            String query = "INSERT INTO `country` (`country`, `countryID`,`createDate`, `createBy`) "
                         + "VALUES ('" + countryName +"', '"+ newCountryID +"','"+ts +"', '"+loggedInUser+"');";
-        System.err.println(query);
-        Boolean updated = DataConn.Update(query);
+            DataConn.Update(query);
             return newCountryID;
         }
 }

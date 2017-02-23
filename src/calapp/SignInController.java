@@ -33,10 +33,10 @@ public class SignInController implements Initializable {
         String user = username.getText();
         String pass = password.getText();
         if (ValidateLogin.checkPassword(user, pass)){
-            System.err.println("Validated Signin");
+
             try {
                 Control c = Control.getInstance();
-                
+                System.err.println();
                 Stage stage = c.getStage();
                 c.SetStage(stage);
                 c.SetPane("custEntry");             
@@ -46,7 +46,7 @@ public class SignInController implements Initializable {
                 }
         }if (pass.equals("")) {
             //System.err.println(status.getText());
-            System.err.println("Invalid Signin");
+
             status.setText(rb.getString("nopass"));
         }else{
             System.err.println(password.getText());
