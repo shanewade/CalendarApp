@@ -81,6 +81,15 @@ public class Control {
                 //Maximizewindow();
                 stage.show();
             }
+            else if (s.equals("newAppt")) {
+                Parent root = FXMLLoader.load(getClass().getResource("NewAppointment.fxml"));
+                stage.close();
+                scene = new Scene(root);
+                stage.setScene(scene);
+                stage.setTitle("Calendar Application");
+                //Maximizewindow();
+                stage.show();
+            }
         } catch (IOException ex) {
             Logger.getLogger(Control.class.getName()).log(Level.SEVERE, null, ex);
         }

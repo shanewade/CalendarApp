@@ -34,7 +34,7 @@
                         </TableView>
                      </children>
                   </HBox>
-                  <Button layoutX="340.0" layoutY="537.0" mnemonicParsing="false" text="New Appointment" />
+                  <Button layoutX="340.0" layoutY="537.0" mnemonicParsing="false" onAction="#launchNewAppointment" text="New Appointment" />
                </children>
             </AnchorPane>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">

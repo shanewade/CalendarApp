@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="482.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="calapp.NewAppointmentController">
+   <top>
+      <Pane prefHeight="41.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label layoutX="220.0" layoutY="12.0" text="New Appointment Data Form" />
+         </children>
+      </Pane>
+   </top>
+   <bottom>
+      <Pane prefHeight="45.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+         <children>
+            <Button layoutX="511.0" layoutY="11.0" mnemonicParsing="false" onAction="#validate" text="Save" />
+            <Button layoutX="433.0" layoutY="11.0" mnemonicParsing="false" onAction="#cancel" text="Cancel" />
+         </children>
+      </Pane>
+   </bottom>
+   <center>
+      <SplitPane dividerPositions="0.29797979797979796" prefHeight="320.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+        <items>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="394.0" prefWidth="94.0" />
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="309.0" prefWidth="478.0">
+               <children>
+                  <TextField fx:id="apptContact" layoutX="139.0" layoutY="61.0" prefHeight="27.0" prefWidth="251.0" />
+                  <TextField fx:id="apptCustomer" layoutX="139.0" layoutY="99.0" prefHeight="27.0" prefWidth="255.0" />
+                  <TextArea fx:id="apptDescript" layoutX="140.0" layoutY="132.0" prefHeight="79.0" prefWidth="254.0" />
+                  <DatePicker fx:id="apptStartDate" layoutX="140.0" layoutY="219.0" prefHeight="27.0" prefWidth="126.0" />
+                  <DatePicker fx:id="apptEndDate" layoutX="139.0" layoutY="256.0" prefHeight="27.0" prefWidth="127.0" />
+                  <TextField fx:id="apptTitle" layoutX="139.0" layoutY="21.0" prefHeight="27.0" prefWidth="252.0" />
+                  <TextField fx:id="apptWebsite" layoutX="139.0" layoutY="297.0" prefHeight="27.0" prefWidth="256.0" />
+                  <Text layoutX="23.0" layoutY="39.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Title:" wrappingWidth="64.138671875" />
+                  <Text layoutX="23.0" layoutY="79.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Contact:" wrappingWidth="64.138671875" />
+                  <Text layoutX="23.0" layoutY="117.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Customer:" wrappingWidth="64.138671875" />
+                  <Text layoutX="23.0" layoutY="176.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Desciption:" wrappingWidth="77.138671875" />
+                  <Text layoutX="22.0" layoutY="237.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Start Date/Time:" wrappingWidth="115.138671875" />
+                  <Text layoutX="23.0" layoutY="274.0" strokeType="OUTSIDE" strokeWidth="0.0" text="End Date/Time:" wrappingWidth="112.138671875" />
+                  <Text layoutX="23.0" layoutY="315.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Website:" wrappingWidth="64.138671875" />
+                  <ComboBox fx:id="timeSelectorStart" layoutX="273.0" layoutY="219.0" prefHeight="27.0" prefWidth="119.0" />
+                  <ComboBox fx:id="timeSelectorEnd" layoutX="274.0" layoutY="256.0" prefHeight="27.0" prefWidth="117.0" />
+               </children>
+            </AnchorPane>
+        </items>
+      </SplitPane>
+   </center>
+</BorderPane>

@@ -32,7 +32,8 @@ public class NewCustomerController implements Initializable {
     @FXML private void saveNewCust(){
 //       
         if (validate()) {
-        Customer newCust = new Customer (Customer.getNextCustID(), custName.getText(), Address.getCurrentOrGetNextAddressID(custAddress.getText()), City.getCurrentOrGetNextCityID(custCity.getText())
+        Customer newCust = new Customer (Customer.getNextCustID(), custName.getText(), Address.getCurrentOrGetNextAddressID(
+                                            custAddress.getText()), City.getCurrentOrGetNextCityID(custCity.getText())
                                          ,Country.getCurrentOrGetNextCountryID(custCountry.getText()), custPhone.getText() );
         
         if (Country.getCountryID(custCountry.getText())==0){
@@ -44,9 +45,11 @@ public class NewCustomerController implements Initializable {
         }
         
         
-        Address.addNewAddress(custAddress.getText(), custPhone.getText(), City.getCurrentOrGetNextCityID(custCity.getText()), custZip.getText());
+        Address.addNewAddress(custAddress.getText(), custPhone.getText(), City.getCurrentOrGetNextCityID(custCity.getText()), 
+                              custZip.getText());
         
-        Customer.addNewCustomer(newCust.getCustid(newCust), newCust.getCustName(newCust),Address.getCurrentOrGetNextAddressID(custAddress.getText()));
+        Customer.addNewCustomer(newCust.getCustid(newCust), newCust.getCustName(newCust),Address.getCurrentOrGetNextAddressID(
+                                custAddress.getText()));
         
         custscreen(); 
         
