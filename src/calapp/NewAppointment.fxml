@@ -31,7 +31,6 @@
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="309.0" prefWidth="478.0">
                <children>
                   <TextField fx:id="apptContact" layoutX="139.0" layoutY="61.0" prefHeight="27.0" prefWidth="251.0" />
-                  <TextField fx:id="apptCustomer" layoutX="139.0" layoutY="99.0" prefHeight="27.0" prefWidth="255.0" />
                   <TextArea fx:id="apptDescript" layoutX="140.0" layoutY="132.0" prefHeight="79.0" prefWidth="254.0" />
                   <DatePicker fx:id="apptStartDate" layoutX="140.0" layoutY="219.0" prefHeight="27.0" prefWidth="126.0" />
                   <DatePicker fx:id="apptEndDate" layoutX="139.0" layoutY="256.0" prefHeight="27.0" prefWidth="127.0" />
@@ -46,6 +45,7 @@
                   <Text layoutX="23.0" layoutY="315.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Website:" wrappingWidth="64.138671875" />
                   <ComboBox fx:id="timeSelectorStart" layoutX="273.0" layoutY="219.0" prefHeight="27.0" prefWidth="119.0" />
                   <ComboBox fx:id="timeSelectorEnd" layoutX="274.0" layoutY="256.0" prefHeight="27.0" prefWidth="117.0" />
+                  <ComboBox fx:id="apptCustomer" layoutX="140.0" layoutY="99.0" prefHeight="27.0" prefWidth="254.0" />
                </children>
             </AnchorPane>
         </items>

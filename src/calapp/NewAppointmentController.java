@@ -6,10 +6,14 @@
 package calapp;
 
 import java.net.URL;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
 import static javafx.collections.FXCollections.observableArrayList;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -31,7 +35,7 @@ public class NewAppointmentController implements Initializable {
 //    @FXML private TextField custName;
     @FXML private TextField apptTitle;
     @FXML private TextField apptContact;
-    @FXML private TextField apptCustomer;
+    @FXML private ComboBox apptCustomer;
     @FXML private TextArea apptDescript;
     @FXML private TextField apptWebsite;
     @FXML private DatePicker apptStartDate;
@@ -52,10 +56,29 @@ public class NewAppointmentController implements Initializable {
           , "20:00", "20:30", "21:00", "21:30", "22:00", "22:30", "23:00", "23:30");
     
     
-    @FXML private void validate() throws Exception{
+    
+    
+    @FXML private void saveAppointment() throws Exception{
+        if (validate()) {
+        
+        GlobalDataStore gsd = GlobalDataStore.getInstance();
+        String loggedInUser = gsd.getLoggedInUser();
+        Calendar calendar = Calendar.getInstance();
+        java.sql.Timestamp ts = new java.sql.Timestamp(calendar.getTime().getTime());
+        
+        //left off here.  Need to write code to get next appointmentID and then set it.  AutoIncrementing the DB is not allowed.
+        //String query = "INSERT INTO `address` (`appointmentId`, `customerID`, `title`, `description`, `contact`, `url`, `start`, `end`, `createDate`, `createdBy`) "
+        //                + "VALUES ('" + custID +"', '"+ custName +"', '"+custAddrId+"', '1', '" +ts +"', '"+loggedInUser+"');";
+        //Boolean updated = DataConn.Update(query);
+
+   
+        }
+    }
+    
+    @FXML private Boolean validate() throws Exception{
         String title = apptTitle.getText();
         String contact = apptContact.getText();
-        String customer = apptCustomer.getText();
+        String customer = (String) apptCustomer.getValue();
         String decription = apptDescript.getText();
         String website = apptWebsite.getText();
         String startDate = apptStartDate.getValue()+ " " +timeSelectorStart.getValue();
@@ -70,29 +93,37 @@ public class NewAppointmentController implements Initializable {
         
         if (title.length() < 2) {
             alert("Title is not long enough.  Min character length is 2");
+            return false;
         }
         
         if (contact.length() < 2 ) {
             alert("Contact is not long enough.  Min character length is 3");
+            return false;
         }
         
-        if (customer.length() < 2) {
-            alert("Customer is not long enough.  Min character length is 3");
+        if (customer == null) {
+            alert("You must select a customer");
+            return false;
         }
+        
         
         if (decription.length() < 10 ) {
             alert("Decription is not long enough.  Min character length is 10");
+            return false;
         }
         
         if (website.length() < 3) {
             alert("Website is not long enough.  Min character length is 3");
+            return false;
         }
         if (resultStart.after(resultEnd)) {
             alert("Your appointment can not have an end date that is before the start date");
+            return false;
             
-        }
+        } else {
         alert("Object saved!!");
-
+        return true;
+        }
         
     }
     
@@ -130,9 +161,17 @@ public class NewAppointmentController implements Initializable {
         timeSelectorStart.setItems(times);
         timeSelectorEnd.setItems(times);
         
+        ResultSet rs = DataConn.Query("SELECT customerName from customer WHERE active = 1;");
+        ObservableList<String> data = FXCollections.observableArrayList();
+        try {
+            while (rs.next()) {
+                data.add(rs.getString("customerName"));    
+            }
+            apptCustomer.setItems(data);
+            
+        } catch (SQLException e){
+            System.err.println(e);
+        }
     }    
-    
-    
-    
     
 }
