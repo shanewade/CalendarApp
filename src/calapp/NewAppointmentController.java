@@ -60,17 +60,34 @@ public class NewAppointmentController implements Initializable {
     
     @FXML private void saveAppointment() throws Exception{
         if (validate()) {
-        
-        GlobalDataStore gsd = GlobalDataStore.getInstance();
-        String loggedInUser = gsd.getLoggedInUser();
-        Calendar calendar = Calendar.getInstance();
-        java.sql.Timestamp ts = new java.sql.Timestamp(calendar.getTime().getTime());
-        
-        //left off here.  Need to write code to get next appointmentID and then set it.  AutoIncrementing the DB is not allowed.
-        //String query = "INSERT INTO `address` (`appointmentId`, `customerID`, `title`, `description`, `contact`, `url`, `start`, `end`, `createDate`, `createdBy`) "
-        //                + "VALUES ('" + custID +"', '"+ custName +"', '"+custAddrId+"', '1', '" +ts +"', '"+loggedInUser+"');";
-        //Boolean updated = DataConn.Update(query);
 
+
+            String title = apptTitle.getText();
+            String contact = apptContact.getText();
+            String customer = (String) apptCustomer.getValue();
+            String decription = apptDescript.getText();
+            String website = apptWebsite.getText();
+            String startDate = apptStartDate.getValue()+ " " +timeSelectorStart.getValue();
+            String endDate = apptEndDate.getValue() + " " + timeSelectorEnd.getValue();
+            int newApptID = getNextApptID();
+            int custID = Customer.getCustIDWithName(customer);
+            DateFormat df = new SimpleDateFormat("yyyy-MM-dd kk:mm");
+            Date resultStart = df.parse(startDate);
+            Date resultEnd = df.parse(endDate);
+            GlobalDataStore gsd = GlobalDataStore.getInstance();
+            String loggedInUser = gsd.getLoggedInUser();
+            Calendar calendar = Calendar.getInstance();
+
+
+            java.sql.Timestamp ts = new java.sql.Timestamp(calendar.getTime().getTime());    
+            java.sql.Timestamp startsqlts = new java.sql.Timestamp(resultStart.getTime());
+            java.sql.Timestamp endsqlts = new java.sql.Timestamp(resultEnd.getTime());
+
+            String query = "INSERT INTO `appointment` (`appointmentID`, `customerID`, `title`, `description`, `contact`, `url`, `start`, `end`, `createDate`, `createBy`) "
+                            + "VALUES ('" + newApptID +"', '"+ custID +"', '"+title+"', '"+decription+"', '" +contact +"', '"+website+"', '"+startsqlts+"', '"+endsqlts+"', '"+ts+"', '"+loggedInUser+"');";
+            Boolean updated = DataConn.Update(query);
+
+            Control.custscreen();
    
         }
     }
@@ -87,10 +104,7 @@ public class NewAppointmentController implements Initializable {
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd kk:mm");
         Date resultStart = df.parse(startDate);
         Date resultEnd = df.parse(endDate);
-
-
-
-        
+       
         if (title.length() < 2) {
             alert("Title is not long enough.  Min character length is 2");
             return false;
@@ -121,7 +135,7 @@ public class NewAppointmentController implements Initializable {
             return false;
             
         } else {
-        alert("Object saved!!");
+
         return true;
         }
         
@@ -144,18 +158,24 @@ public class NewAppointmentController implements Initializable {
         control.SetPane("custEntry");
     }
     
-    
-    
-    
-    
+    public static int getNextApptID() {
+        ResultSet rs = DataConn.Query("SELECT MAX(appointmentID) AS id FROM appointment;");
+        try {
+            rs.next();
+            int nextID = rs.getInt("id");
+            nextID++;
+            return nextID;
+        }
+        catch (SQLException e) {
+            System.err.println(e);
+        }
+        return 0;
+    }
+   
     /**
      * Initializes the controller class.
      */
-    
-    
-    
-    
-    
+   
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         timeSelectorStart.setItems(times);

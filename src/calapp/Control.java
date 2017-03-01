@@ -23,7 +23,7 @@ public class Control {
     private Stage stage;
     private String username;
     private Scene scene;
-    private boolean logedin;
+    private final boolean logedin;
     private static final Control Instance = new Control();
    // private MainDocumentController maincontroller;
 
@@ -51,44 +51,69 @@ public class Control {
     public Scene getScene(){
         return scene;
     }
+    
+    public static void custscreen(){
+        try {
+            Control c = Control.getInstance();
+            System.err.println();
+            Stage stage = c.getStage();
+            c.SetStage(stage);
+            c.SetPane("custEntry");             
+
+            } catch (Exception e1) {
+                System.err.println(e1);
+            }
+    }
     public void SetPane(String s){
         try {
             
-            if(s.equals("main")){
-                Parent root = FXMLLoader.load(getClass().getResource("main.fxml"));
-                stage.close();
-                scene = new Scene(root);
-                stage.setScene(scene);
-                stage.setTitle("Calendar Application");
-                //Maximizewindow();
-                stage.show();
-            }
-            else if (s.equals("custEntry")){
-                Parent root = FXMLLoader.load(getClass().getResource("customerEntryForm.fxml"));
-                stage.close();
-                scene = new Scene(root);
-                stage.setScene(scene);
-                stage.setTitle("Calendar Application");
-                //Maximizewindow();
-                stage.show();
-            }
-            else if (s.equals("newCust")){
-                Parent root = FXMLLoader.load(getClass().getResource("NewCustomer.fxml"));
-                stage.close();
-                scene = new Scene(root);
-                stage.setScene(scene);
-                stage.setTitle("Calendar Application");
-                //Maximizewindow();
-                stage.show();
-            }
-            else if (s.equals("newAppt")) {
-                Parent root = FXMLLoader.load(getClass().getResource("NewAppointment.fxml"));
-                stage.close();
-                scene = new Scene(root);
-                stage.setScene(scene);
-                stage.setTitle("Calendar Application");
-                //Maximizewindow();
-                stage.show();
+            switch (s) {
+                case "main":
+                    {
+                        Parent root = FXMLLoader.load(getClass().getResource("main.fxml"));
+                        stage.close();
+                        scene = new Scene(root);
+                        stage.setScene(scene);
+                        stage.setTitle("Calendar Application");
+                        //Maximizewindow();
+                        stage.show();
+                        break;
+                    }
+                case "custEntry":
+                    {
+                        Parent root = FXMLLoader.load(getClass().getResource("customerEntryForm.fxml"));
+                        stage.close();
+                        scene = new Scene(root);
+                        stage.setScene(scene);
+                        stage.setTitle("Calendar Application");
+                        //Maximizewindow();
+                        stage.show();
+                        break;
+                    }
+                case "newCust":
+                    {
+                        Parent root = FXMLLoader.load(getClass().getResource("NewCustomer.fxml"));
+                        stage.close();
+                        scene = new Scene(root);
+                        stage.setScene(scene);
+                        stage.setTitle("Calendar Application");
+                        //Maximizewindow();
+                        stage.show();
+                        break;
+                    }
+                case "newAppt":
+                    {
+                        Parent root = FXMLLoader.load(getClass().getResource("NewAppointment.fxml"));
+                        stage.close();
+                        scene = new Scene(root);
+                        stage.setScene(scene);
+                        stage.setTitle("Calendar Application");
+                        //Maximizewindow();
+                        stage.show();
+                        break;
+                    }
+                default:
+                    break;
             }
         } catch (IOException ex) {
             Logger.getLogger(Control.class.getName()).log(Level.SEVERE, null, ex);

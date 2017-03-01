@@ -5,10 +5,8 @@
  */
 package calapp;
 
-import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Timestamp;
 import java.util.Calendar;
 
 /**
@@ -20,9 +18,9 @@ public class Customer {
     private int custId;
     private int custCityID;
     private int custCountryID;
-    private String custPhone;
-    private String custName;
-    private int custAddress;
+    private final String custPhone;
+    private final String custName;
+    private final int custAddress;
     
     Customer (int id,String name, int addr, int city, int country, String phone ) {
         custId = id;
@@ -80,7 +78,17 @@ public class Customer {
         return 0;
     }
     
-    
+    public static int getCustIDWithName(String name){
+        ResultSet rs = DataConn.Query("SELECT customerID AS id FROM customer WHERE customerName = '"+name+"';");
+        try {
+            rs.next();
+            int custID = rs.getInt("id");
+            return custID;
+        } catch (SQLException e) {
+            System.err.println(e);
+        }
+        return 0;
+    }
     
     
     
