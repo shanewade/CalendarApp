@@ -52,13 +52,13 @@ public class Control {
         return scene;
     }
     
-    public static void custscreen(){
+    public static void mainscreen(){
         try {
             Control c = Control.getInstance();
             System.err.println();
             Stage stage = c.getStage();
             c.SetStage(stage);
-            c.SetPane("custEntry");             
+            c.SetPane("main");             
 
             } catch (Exception e1) {
                 System.err.println(e1);
@@ -70,7 +70,7 @@ public class Control {
             switch (s) {
                 case "main":
                     {
-                        Parent root = FXMLLoader.load(getClass().getResource("main.fxml"));
+                        Parent root = FXMLLoader.load(getClass().getResource("Menu.fxml"));
                         stage.close();
                         scene = new Scene(root);
                         stage.setScene(scene);

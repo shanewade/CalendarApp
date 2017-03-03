@@ -11,9 +11,10 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
+
 
 /**
  * FXML Controller class
@@ -28,6 +29,9 @@ public class NewCustomerController implements Initializable {
     @FXML private TextField custCity;
     @FXML private TextField custZip;
     @FXML private TextField custCountry;
+    
+    
+    
     
     @FXML private void saveNewCust(){
 //       
@@ -51,7 +55,7 @@ public class NewCustomerController implements Initializable {
         Customer.addNewCustomer(newCust.getCustid(newCust), newCust.getCustName(newCust),Address.getCurrentOrGetNextAddressID(
                                 custAddress.getText()));
         
-        custscreen(); 
+        Control.mainscreen();
         
             }
         
@@ -59,18 +63,7 @@ public class NewCustomerController implements Initializable {
         }
 
     
-    @FXML private void custscreen(){
-        try {
-            Control c = Control.getInstance();
-            System.err.println();
-            Stage stage = c.getStage();
-            c.SetStage(stage);
-            c.SetPane("custEntry");             
-
-            } catch (Exception e1) {
-                System.err.println(e1);
-            }
-    }
+    
     
     private boolean validate() {
         String name = custName.getText();
@@ -122,6 +115,9 @@ public class NewCustomerController implements Initializable {
             });
 }
     
+        @FXML private void cancel(){
+        Control.mainscreen();
+    }
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO

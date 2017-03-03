@@ -16,9 +16,11 @@ import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import static javafx.collections.FXCollections.observableArrayList;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
@@ -42,6 +44,7 @@ public class NewAppointmentController implements Initializable {
     @FXML private DatePicker apptEndDate;
     @FXML private ComboBox timeSelectorStart;
     @FXML private ComboBox timeSelectorEnd;
+    @FXML private Button save;
     
     private Date startDateTime;
     private Date endDateTime;
@@ -87,7 +90,7 @@ public class NewAppointmentController implements Initializable {
                             + "VALUES ('" + newApptID +"', '"+ custID +"', '"+title+"', '"+decription+"', '" +contact +"', '"+website+"', '"+startsqlts+"', '"+endsqlts+"', '"+ts+"', '"+loggedInUser+"');";
             Boolean updated = DataConn.Update(query);
 
-            Control.custscreen();
+            Control.mainscreen();
    
         }
     }
@@ -154,8 +157,7 @@ public class NewAppointmentController implements Initializable {
             });
     }
     @FXML private void cancel(){
-        Control control = Control.getInstance();
-        control.SetPane("custEntry");
+        Control.mainscreen();
     }
     
     public static int getNextApptID() {
@@ -192,6 +194,22 @@ public class NewAppointmentController implements Initializable {
         } catch (SQLException e){
             System.err.println(e);
         }
+        
+        save.setOnAction((ActionEvent event) -> {
+
+            try {
+            
+                saveAppointment();
+            } catch (Exception e) {
+                System.err.println(e);
+            }
+        }
+        
+        
+        
+        
+        
+        );
     }    
     
 }

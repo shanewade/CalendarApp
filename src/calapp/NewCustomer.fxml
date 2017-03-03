@@ -23,7 +23,7 @@
    <bottom>
       <Pane BorderPane.alignment="CENTER">
          <children>
-            <Button alignment="CENTER" contentDisplay="CENTER" layoutX="471.0" mnemonicParsing="false" onAction="#custscreen" text="Cancel" textAlignment="CENTER" />
+            <Button alignment="CENTER" contentDisplay="CENTER" layoutX="471.0" mnemonicParsing="false" onAction="#cancel" text="Cancel" textAlignment="CENTER" />
             <Button layoutX="541.0" mnemonicParsing="false" onAction="#saveNewCust" text="Save" />
          </children>
       </Pane>

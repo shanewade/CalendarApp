@@ -28,6 +28,7 @@ public class SignInController implements Initializable {
     
     ResourceBundle rb = ResourceBundle.getBundle("calapp.ApplicationResources");
     
+    
     @FXML
     private void validateSignin(ActionEvent ae) {
         String user = username.getText();
@@ -39,7 +40,7 @@ public class SignInController implements Initializable {
                 System.err.println();
                 Stage stage = c.getStage();
                 c.SetStage(stage);
-                c.SetPane("custEntry");             
+                c.SetPane("main");             
 				
                 } catch (Exception e1) {
                         System.err.println(e1);
