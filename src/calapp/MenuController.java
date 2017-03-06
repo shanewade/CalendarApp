@@ -23,6 +23,7 @@ public class MenuController implements Initializable {
      @FXML private Button newAppointment;
      @FXML private Button viewCustomers;
      @FXML private Button viewAppointments;
+     @FXML private Button viewCalendar;
      
      
      
@@ -52,6 +53,17 @@ public class MenuController implements Initializable {
                         System.err.println(e1);
                 }
     }
+    
+    private void launchViewAppointments() {
+        try {
+            Control c = Control.getInstance();
+            Stage stage = c.getStage();
+            c.SetStage(stage);
+            c.SetPane("viewAppt");
+        } catch (Exception e) {
+            System.err.println(e);
+        }
+    }
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         newCustomer.setOnAction((ActionEvent event) -> {
@@ -72,6 +84,15 @@ public class MenuController implements Initializable {
             } catch (Exception e) {
                 System.err.println(e);
             }
+        });
+        
+        viewAppointments.setOnAction((ActionEvent event) -> {
+           
+           try {
+               launchViewAppointments();
+           } catch (Exception e) {
+               e.printStackTrace();
+           }
         });
     }
     

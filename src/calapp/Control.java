@@ -6,11 +6,18 @@
 package calapp;
 
 import java.io.IOException;
+import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.ListCell;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 /**
@@ -64,6 +71,18 @@ public class Control {
                 System.err.println(e1);
             }
     }
+    
+  
+	
+	public static class LocaleCell extends ListCell<Locale> {
+	    @Override
+	    public void updateItem(Locale locale, boolean empty) {
+	        super.updateItem(locale, empty);
+	        setText(locale == null ? null : locale.getDisplayName(locale));
+	    }
+        }
+	
+    
     public void SetPane(String s){
         try {
             
@@ -112,6 +131,18 @@ public class Control {
                         stage.show();
                         break;
                     }
+                case "viewAppt":
+                    {
+                        Parent root = FXMLLoader.load(getClass().getResource("ViewAppointments.fxml"));
+                        stage.close();
+                        scene = new Scene(root);
+                        stage.setScene(scene);
+                        stage.setTitle("Calendar Application");
+                        //Maximizewindow();
+                        stage.show();
+                        break;
+                    }
+                
                 default:
                     break;
             }

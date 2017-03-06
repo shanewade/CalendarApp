@@ -25,6 +25,7 @@ public class NewCustomerController implements Initializable {
     
     @FXML private TextField custName;
     @FXML private TextField custAddress;
+    @FXML private TextField custAddress2;
     @FXML private TextField custPhone;
     @FXML private TextField custCity;
     @FXML private TextField custZip;
@@ -48,10 +49,13 @@ public class NewCustomerController implements Initializable {
             City.addNewCity(custCity.getText(), Country.getCountryID(custCountry.getText()));
         }
         
-        
+        if (custAddress2.getText() == null){
         Address.addNewAddress(custAddress.getText(), custPhone.getText(), City.getCurrentOrGetNextCityID(custCity.getText()), 
                               custZip.getText());
-        
+        } else {
+            Address.addNewAddress(custAddress.getText(), custAddress2.getText(), custPhone.getText(), City.getCurrentOrGetNextCityID(custCity.getText()), 
+                              custZip.getText());
+        }
         Customer.addNewCustomer(newCust.getCustid(newCust), newCust.getCustName(newCust),Address.getCurrentOrGetNextAddressID(
                                 custAddress.getText()));
         

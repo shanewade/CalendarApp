@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="calapp.ViewAppointmentsController">
+   <children>
+      <BorderPane layoutX="10.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0">
+         <bottom>
+            <Pane BorderPane.alignment="CENTER">
+               <children>
+                  <Button alignment="CENTER" contentDisplay="CENTER" layoutX="471.0" mnemonicParsing="false" text="Cancel" textAlignment="CENTER" />
+                  <Button layoutX="541.0" mnemonicParsing="false" text="Save" />
+               </children>
+            </Pane>
+         </bottom>
+         <center>
+            <SplitPane dividerPositions="0.29797979797979796" prefHeight="160.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+               <items>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="338.0" prefWidth="120.0" />
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                     <children>
+                        <TableView fx:id="table" prefHeight="337.0" prefWidth="415.0">
+                          <columns>
+                            <TableColumn fx:id="titleColumn" prefWidth="75.0" text="Title" />
+                            <TableColumn fx:id="custNameColumn" prefWidth="119.0" text="Customer Name" />
+                              <TableColumn fx:id="custContactColumn" prefWidth="69.0" text="Contact" />
+                              <TableColumn fx:id="startDateColumn" prefWidth="70.0" text="Start Date/Time" />
+                              <TableColumn fx:id="endDateColumn" prefWidth="81.0" text="End Date/Time" />
+                          </columns>
+                        </TableView>
+                     </children></AnchorPane>
+               </items>
+            </SplitPane>
+         </center>
+         <top>
+            <Pane BorderPane.alignment="CENTER">
+               <children>
+                  <Label layoutX="221.0" layoutY="11.0" text="Scheduled Appointments">
+                     <padding>
+                        <Insets bottom="5.0" />
+                     </padding>
+                  </Label>
+               </children>
+            </Pane>
+         </top>
+      </BorderPane>
+   </children>
+</AnchorPane>

@@ -46,6 +46,19 @@ public class Address {
             Boolean updated = DataConn.Update(query);
             return newAddressID;  
     }
+    
+        public static int addNewAddress(String addressName, String addressName2, String phone, int cityID, String postalCode) {
+            GlobalDataStore gsd = GlobalDataStore.getInstance();
+            String loggedInUser = gsd.getLoggedInUser();
+            Calendar calendar = Calendar.getInstance();
+            int newAddressID = getCurrentOrGetNextAddressID(addressName);
+            java.sql.Timestamp ts = new java.sql.Timestamp(calendar.getTime().getTime());
+            String query = "INSERT INTO `address` (`address`,`address2`, `addressID`, `cityID` , `phone` ,`createDate`, `createBy`, `postalCode`) "
+                            + "VALUES ('" + addressName +"', '"+ addressName2 +"', '"+ newAddressID +"', '"+cityID+"','"+phone+"' , '"+ts +"', '"+loggedInUser+"','"+postalCode+"');";
+            System.err.println(query);
+            Boolean updated = DataConn.Update(query);
+            return newAddressID;  
+    }
         
     public static int setAddressID(String addressName, int cityID, int phone, String country) {
         String queryCountry = "SELECT countryID AS id FROM country WHERE country = '" + country + "' ;";

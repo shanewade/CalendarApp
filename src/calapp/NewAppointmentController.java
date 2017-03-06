@@ -40,6 +40,7 @@ public class NewAppointmentController implements Initializable {
     @FXML private ComboBox apptCustomer;
     @FXML private TextArea apptDescript;
     @FXML private TextField apptWebsite;
+    @FXML private TextField apptLocation;
     @FXML private DatePicker apptStartDate;
     @FXML private DatePicker apptEndDate;
     @FXML private ComboBox timeSelectorStart;
@@ -70,6 +71,7 @@ public class NewAppointmentController implements Initializable {
             String customer = (String) apptCustomer.getValue();
             String decription = apptDescript.getText();
             String website = apptWebsite.getText();
+            String location = apptLocation.getText();
             String startDate = apptStartDate.getValue()+ " " +timeSelectorStart.getValue();
             String endDate = apptEndDate.getValue() + " " + timeSelectorEnd.getValue();
             int newApptID = getNextApptID();
@@ -86,8 +88,8 @@ public class NewAppointmentController implements Initializable {
             java.sql.Timestamp startsqlts = new java.sql.Timestamp(resultStart.getTime());
             java.sql.Timestamp endsqlts = new java.sql.Timestamp(resultEnd.getTime());
 
-            String query = "INSERT INTO `appointment` (`appointmentID`, `customerID`, `title`, `description`, `contact`, `url`, `start`, `end`, `createDate`, `createBy`) "
-                            + "VALUES ('" + newApptID +"', '"+ custID +"', '"+title+"', '"+decription+"', '" +contact +"', '"+website+"', '"+startsqlts+"', '"+endsqlts+"', '"+ts+"', '"+loggedInUser+"');";
+            String query = "INSERT INTO `appointment` (`appointmentID`, `customerID`, `title`, `description`, `contact`, `url`, `location`, `start`, `end`, `createDate`, `createBy`) "
+                            + "VALUES ('" + newApptID +"', '"+ custID +"', '"+title+"', '"+decription+"', '" +contact +"', '"+website+"', '"+location+"', '"+startsqlts+"', '"+endsqlts+"', '"+ts+"', '"+loggedInUser+"');";
             Boolean updated = DataConn.Update(query);
 
             Control.mainscreen();
@@ -101,6 +103,7 @@ public class NewAppointmentController implements Initializable {
         String customer = (String) apptCustomer.getValue();
         String decription = apptDescript.getText();
         String website = apptWebsite.getText();
+        String location = apptLocation.getText();
         String startDate = apptStartDate.getValue()+ " " +timeSelectorStart.getValue();
         String endDate = apptEndDate.getValue() + " " + timeSelectorEnd.getValue();
 
@@ -132,6 +135,9 @@ public class NewAppointmentController implements Initializable {
         if (website.length() < 3) {
             alert("Website is not long enough.  Min character length is 3");
             return false;
+        }
+        if (location.length() < 3) {
+            alert("Location is not long enough.  Min character length is 3");
         }
         if (resultStart.after(resultEnd)) {
             alert("Your appointment can not have an end date that is before the start date");

@@ -46,6 +46,8 @@
                   <ComboBox fx:id="timeSelectorStart" layoutX="273.0" layoutY="219.0" prefHeight="27.0" prefWidth="119.0" />
                   <ComboBox fx:id="timeSelectorEnd" layoutX="274.0" layoutY="256.0" prefHeight="27.0" prefWidth="117.0" />
                   <ComboBox fx:id="apptCustomer" layoutX="140.0" layoutY="99.0" prefHeight="27.0" prefWidth="254.0" />
+                  <Text layoutX="25.0" layoutY="354.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Location" wrappingWidth="64.138671875" />
+                  <TextField fx:id="apptLocation" layoutX="139.0" layoutY="336.0" prefHeight="27.0" prefWidth="256.0" />
                </children>
             </AnchorPane>
         </items>
