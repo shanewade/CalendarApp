@@ -12,6 +12,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import java.util.ResourceBundle;
+import java.util.TimerTask;
 
 /**
  *
@@ -22,6 +23,10 @@ public class AppLauncher extends Application {
     
      @Override
     public void start(Stage stage) throws Exception {
+        
+        
+        
+        
         Locale locale = Locale.getDefault();
         Control c = Control.getInstance();       
         c.SetStage(stage);

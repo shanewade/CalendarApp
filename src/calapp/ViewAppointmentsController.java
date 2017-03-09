@@ -48,7 +48,8 @@ public class ViewAppointmentsController implements Initializable {
 private int week;
 private int month;
 private int year;
-
+private GlobalDataStore gsd;
+private String loggedInUser;
 
 private Boolean isMonthlyView;
 
@@ -62,22 +63,20 @@ private void getByWeekAppts(int week, int year) {
     }
     isMonthlyView = false;
     try {
-           ResultSet rs = DataConn.Query(
-                   "SELECT start, end, title , customer.customerName, contact  \n" +
+        String query =   "SELECT start, end, title , customer.customerName, contact  \n" +
                    "FROM `appointment`\n" +
                    "INNER JOIN `customer` ON  customer.customerID = appointment.customerID\n" +
                    "WHERE  YEAR(start) = "+year+"\n" +
-                   "AND    WEEK(start) = "+week+""
-           );
+                   "AND    WEEK(start) = "+week+"" +
+                   " AND    createBy = '"+loggedInUser+"';";
+                
+        ResultSet rs = DataConn.Query(query);
            if (!rs.isLast()) {
                int columnNumber = rs.findColumn("title");
-               System.err.println("Got the resultset back");
            }
            Appointment appt;
            while(rs.next()) {
-               System.err.println(rs.getString("title"));
                appt = new Appointment(rs.getString("title"), rs.getString("customer.customerName"), rs.getString("contact"), rs.getString("start"), rs.getString("end"));
-               System.err.println(appt);
                data.add(appt);
                
            }
@@ -105,26 +104,22 @@ private void getByMonthAppts(int month, int year){
     
         isMonthlyView = true;
         try {
-           ResultSet rs = DataConn.Query(
-                   "SELECT start, end, title , customer.customerName, contact  \n" +
+                   String query =   "SELECT start, end, title , customer.customerName, contact  \n" +
                    "FROM `appointment`\n" +
                    "INNER JOIN `customer` ON  customer.customerID = appointment.customerID\n" +
                    "WHERE  YEAR(start) = "+year+"\n" +
-                   "AND    MONTH(start) = "+month+""
-           );
+                   "AND    MONTH(start) = "+month+"" +
+                   " AND    createBy = '"+loggedInUser+"';";
+                
+        ResultSet rs = DataConn.Query(query);
            if (!rs.isLast()) {
-               System.err.println("Got the resultset back");
- //              int columnNumber = rs.findColumn("title");
            }
            Appointment appt;
            while(rs.next()) {
-               System.err.println(rs.getString("title"));
                appt = new Appointment(rs.getString("title"), rs.getString("customer.customerName"), rs.getString("contact"), rs.getString("start"), rs.getString("end"));
-               System.err.println(appt);
                data.add(appt);
                
            }
-           System.err.println("Size: "+data.size());
            
             titleColumn.setCellValueFactory(new PropertyValueFactory<>("apptTitle"));
             custNameColumn.setCellValueFactory(new PropertyValueFactory<>("customerName"));
@@ -151,6 +146,8 @@ private void getByMonthAppts(int month, int year){
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        gsd = GlobalDataStore.getInstance();
+        loggedInUser = gsd.getLoggedInUser();
         Date date = new Date();
         Calendar cal = Calendar.getInstance();
         cal.setTime(date);
@@ -180,7 +177,6 @@ private void getByMonthAppts(int month, int year){
             try {
                 getByWeekAppts(week, year);
             } catch (Exception e) {
-                System.err.println(e);
             }
         });
         
@@ -220,30 +216,23 @@ private void getByMonthAppts(int month, int year){
             if (month == 1) {
                 month = 12;
                 year--;
-                System.err.println("Line 220: Month: "+month+"Year: "+year);
                 getByMonthAppts(month, year);}
             else {
                 month--;
-                System.err.println("Line : 224ELSE Month: "+month+"Year: "+year);
                 getByMonthAppts(month, year);
             }
-             // System.err.println(isMonthlyView);
            else {
                if (week == 1) {
                    week = 52;
                    year--;
-                   System.err.println("Line 232L Week: "+week+"Year: "+year);
                }
                else {
                week--;
-               System.err.println("Line 236 Week: "+week+"Year: "+year);
                }
                try { 
                    getByWeekAppts(week, year);
-                    //System.err.println("Line 240: Week: "+week+"Year: "+year);
                } catch (Exception e) {
                    week++;
-                   System.err.println("Line 243: Week: "+week+"Year: "+year);
                    e.printStackTrace();
                }
            }
@@ -261,6 +250,7 @@ private void getByMonthAppts(int month, int year){
 				
                 } catch (Exception e1) {
                         System.err.println(e1);
+                               
                 }
         });
         
