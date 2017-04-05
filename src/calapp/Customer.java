@@ -61,8 +61,8 @@ public class Customer {
         LocalDateTime ldt = LocalDateTime.now();
         Timestamp ts = Timestamp.from(MySqlDate.getGMTMySQLDate(ldt));
         System.err.println(ts);
-        String query = "INSERT INTO `customer` (`customerID`, `customerName`, `addressID`, `active`, `createDate`, `createdBy`) "
-                        + "VALUES ('" + custID +"', '"+ custName +"', '"+custAddrId+"', '1', '" +ts +"', '"+loggedInUser+"');";
+        String query = "INSERT INTO `customer` (`customerID`, `customerName`, `addressID`, `active`, `createDate`,`lastUpdateBy`, `createdBy`) "
+                        + "VALUES ('" + custID +"', '"+ custName +"', '"+custAddrId+"', '1', '" +ts +"', '"+loggedInUser+"', '"+loggedInUser+"');";
         Boolean updated = DataConn.Update(query);
    return false;
     }

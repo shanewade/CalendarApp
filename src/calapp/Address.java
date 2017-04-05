@@ -40,8 +40,8 @@ public class Address {
             Calendar calendar = Calendar.getInstance();
             int newAddressID = getCurrentOrGetNextAddressID(addressName);
             java.sql.Timestamp ts = new java.sql.Timestamp(calendar.getTime().getTime());
-            String query = "INSERT INTO `address` (`address`, `addressID`, `cityID` , `phone` ,`createDate`, `createBy`, `postalCode`) "
-                            + "VALUES ('" + addressName +"', '"+ newAddressID +"', '"+cityID+"','"+phone+"' , '"+ts +"', '"+loggedInUser+"','"+postalCode+"');";
+            String query = "INSERT INTO `address` (`address`,`address2`, `addressID`, `cityID` , `phone` ,`createDate`,`lastUpdateBy`, `createdBy`, `postalCode`) "
+                            + "VALUES ('" + addressName +"', 'none', '"+ newAddressID +"', '"+cityID+"','"+phone+"' , '"+ts +"', '"+loggedInUser+"','"+loggedInUser+"','"+postalCode+"');";
             System.err.println(query);
             Boolean updated = DataConn.Update(query);
             return newAddressID;  
@@ -53,8 +53,8 @@ public class Address {
             Calendar calendar = Calendar.getInstance();
             int newAddressID = getCurrentOrGetNextAddressID(addressName);
             java.sql.Timestamp ts = new java.sql.Timestamp(calendar.getTime().getTime());
-            String query = "INSERT INTO `address` (`address`,`address2`, `addressID`, `cityID` , `phone` ,`createDate`, `createBy`, `postalCode`) "
-                            + "VALUES ('" + addressName +"', '"+ addressName2 +"', '"+ newAddressID +"', '"+cityID+"','"+phone+"' , '"+ts +"', '"+loggedInUser+"','"+postalCode+"');";
+            String query = "INSERT INTO `address` (`address`,`address2`, `addressID`, `cityID` , `phone` ,`createDate`,`lastUpdateBy`, `createdBy`, `postalCode`) "
+                            + "VALUES ('" + addressName +"', '"+ addressName2 +"', '" +newAddressID +"', '"+cityID+"','"+phone+"' , '"+ts +"', '"+loggedInUser+"','"+loggedInUser+"','"+postalCode+"');";
             System.err.println(query);
             Boolean updated = DataConn.Update(query);
             return newAddressID;  

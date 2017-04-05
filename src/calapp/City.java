@@ -57,8 +57,8 @@ public class City {
             Calendar calendar = Calendar.getInstance();
             int newCityID = getCurrentOrGetNextCityID(cityName);
             java.sql.Timestamp ts = new java.sql.Timestamp(calendar.getTime().getTime());
-            String query = "INSERT INTO `city` (`city`, `cityID`,`countryID` ,`createDate`, `createBy`) "
-                        + "VALUES ('" + cityName +"', '"+ newCityID +"', '"+countryID+"', '"+ts +"', '"+loggedInUser+"');";
+            String query = "INSERT INTO `city` (`city`, `cityID`,`countryID` ,`createDate`, `lastUpdateBy`,`createdBy`) "
+                        + "VALUES ('" + cityName +"', '"+ newCityID +"', '"+countryID+"', '"+ts +"', '"+loggedInUser+"', '"+loggedInUser+"');";
             DataConn.Update(query);
             return newCityID;  
         } 

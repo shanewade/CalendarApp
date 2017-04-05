@@ -54,8 +54,8 @@ public class Country {
             Calendar calendar = Calendar.getInstance();
             int newCountryID = getCurrentOrGetNextCountryID(countryName);
             java.sql.Timestamp ts = new java.sql.Timestamp(calendar.getTime().getTime());
-            String query = "INSERT INTO `country` (`country`, `countryID`,`createDate`, `createBy`) "
-                        + "VALUES ('" + countryName +"', '"+ newCountryID +"','"+ts +"', '"+loggedInUser+"');";
+            String query = "INSERT INTO `country` (`country`, `countryID`,`createDate`, `lastUpdateBy`,`createdBy`) "
+                        + "VALUES ('" + countryName +"', '"+ newCountryID +"','"+ts +"', '"+loggedInUser+"', '"+loggedInUser+"');";
             DataConn.Update(query);
             return newCountryID;
         }
