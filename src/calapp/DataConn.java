@@ -11,10 +11,10 @@ import java.sql.Statement;
 public class DataConn {
     
     //Database configuration settings
-    private static final String address = "localhost";
-    private static final String user = "root";
-    private static final String pass = "";  
-    private static final String database = "Calendar";
+    private static final String address = "52.206.157.109";
+    private static final String user = "U02zbj";
+    private static final String pass = "53687866205";  
+    private static final String database = "U02zbj";
     //Database configurations settings
     
     private static final DataConn db = new DataConn();
@@ -34,6 +34,7 @@ public class DataConn {
     public static boolean connectmysql() {
         
         String URL = "jdbc:mysql://" + address + "/" + database;
+        // + "?useLegacyDatetimeCode=false&serverTimezone=UTC"
         try {
             DriverManager.registerDriver(new com.mysql.jdbc.Driver());
         } catch (SQLException e) {

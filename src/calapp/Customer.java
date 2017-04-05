@@ -7,7 +7,9 @@ package calapp;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Calendar;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
+
 
 /**
  *
@@ -56,8 +58,9 @@ public class Customer {
     public static boolean addNewCustomer(int custID, String custName, int custAddrId) {
         GlobalDataStore gsd = GlobalDataStore.getInstance();
         String loggedInUser = gsd.getLoggedInUser();
-        Calendar calendar = Calendar.getInstance();
-        java.sql.Timestamp ts = new java.sql.Timestamp(calendar.getTime().getTime());
+        LocalDateTime ldt = LocalDateTime.now();
+        Timestamp ts = Timestamp.from(MySqlDate.getGMTMySQLDate(ldt));
+        System.err.println(ts);
         String query = "INSERT INTO `customer` (`customerID`, `customerName`, `addressID`, `active`, `createDate`, `createdBy`) "
                         + "VALUES ('" + custID +"', '"+ custName +"', '"+custAddrId+"', '1', '" +ts +"', '"+loggedInUser+"');";
         Boolean updated = DataConn.Update(query);

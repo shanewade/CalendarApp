@@ -8,10 +8,10 @@ package calapp;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
+import java.sql.Timestamp;
 import java.util.Calendar;
-import java.util.Date;
+import java.time.*;
+import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import static javafx.collections.FXCollections.observableArrayList;
@@ -47,8 +47,8 @@ public class NewAppointmentController implements Initializable {
     @FXML private ComboBox timeSelectorEnd;
     @FXML private Button save;
     
-    private Date startDateTime;
-    private Date endDateTime;
+    private ZonedDateTime startDateTime;
+    private ZonedDateTime endDateTime;
     
     
     
@@ -76,20 +76,39 @@ public class NewAppointmentController implements Initializable {
             String endDate = apptEndDate.getValue() + " " + timeSelectorEnd.getValue();
             int newApptID = getNextApptID();
             int custID = Customer.getCustIDWithName(customer);
-            DateFormat df = new SimpleDateFormat("yyyy-MM-dd kk:mm");
-            Date resultStart = df.parse(startDate);
-            Date resultEnd = df.parse(endDate);
+            DateTimeFormatter df = DateTimeFormatter.ofPattern("yyyy-MM-dd kk:mm");
+            
+            System.err.println(startDate);
+            System.err.println(endDate);
+            
+            LocalDateTime ldtStart = LocalDateTime.parse(startDate, df);
+            LocalDateTime ldtEnd = LocalDateTime.parse(endDate, df);
+            
+            ZoneId zid = ZoneId.systemDefault();
+            
+            ZonedDateTime zdtStart = ldtStart.atZone(zid);
+            ZonedDateTime zdtEnd = ldtEnd.atZone(zid);
+            
+            ZonedDateTime utcStart = zdtStart.withZoneSameInstant(ZoneId.of("UTC"));
+            ZonedDateTime utcEnd = zdtEnd.withZoneSameInstant(ZoneId.of("UTC"));
+            
+            LocalDateTime utcLDTStart = utcStart.toLocalDateTime();
+            LocalDateTime utcLDTEnd = utcEnd.toLocalDateTime();
+            
+            String utcStringStart = utcLDTStart.toString();
+            String utcStringEnd = utcLDTEnd.toString();
+            
+            
             GlobalDataStore gsd = GlobalDataStore.getInstance();
             String loggedInUser = gsd.getLoggedInUser();
             Calendar calendar = Calendar.getInstance();
+            
+            Timestamp ts = Timestamp.from(Instant.now());
 
-
-            java.sql.Timestamp ts = new java.sql.Timestamp(calendar.getTime().getTime());    
-            java.sql.Timestamp startsqlts = new java.sql.Timestamp(resultStart.getTime());
-            java.sql.Timestamp endsqlts = new java.sql.Timestamp(resultEnd.getTime());
-
-            String query = "INSERT INTO `appointment` (`appointmentID`, `customerID`, `title`, `description`, `contact`, `url`, `location`, `start`, `end`, `createDate`, `createBy`) "
-                            + "VALUES ('" + newApptID +"', '"+ custID +"', '"+title+"', '"+decription+"', '" +contact +"', '"+website+"', '"+location+"', '"+startsqlts+"', '"+endsqlts+"', '"+ts+"', '"+loggedInUser+"');";
+            
+            String query = "INSERT INTO `appointment` (`appointmentID`, `customerID`, `title`, `description`, `contact`, `url`, `location`, `start`, `end`, `createDate`, `createdBy`, `lastUpdateBy`) "
+                         + "VALUES ('" + newApptID +"', '"+ custID +"', '"+title+"', '"+decription+"', '" +contact +"', '"+website+"', '"+location+"', '"+utcStringStart+"', '"+utcStringEnd+"', '"+ts+"', '"+loggedInUser+"', '"+loggedInUser+"');";
+            System.err.println(query);
             Boolean updated = DataConn.Update(query);
 
             Control.mainscreen();
@@ -107,9 +126,9 @@ public class NewAppointmentController implements Initializable {
         String startDate = apptStartDate.getValue()+ " " +timeSelectorStart.getValue();
         String endDate = apptEndDate.getValue() + " " + timeSelectorEnd.getValue();
 
-        DateFormat df = new SimpleDateFormat("yyyy-MM-dd kk:mm");
-        Date resultStart = df.parse(startDate);
-        Date resultEnd = df.parse(endDate);
+        DateTimeFormatter df = DateTimeFormatter.ofPattern("yyyy-MM-dd kk:mm");
+        LocalDateTime resultStart = LocalDateTime.parse(startDate, df);
+        LocalDateTime resultEnd = LocalDateTime.parse(endDate, df);
        
         if (title.length() < 2) {
             alert("Title is not long enough.  Min character length is 2");
@@ -139,7 +158,7 @@ public class NewAppointmentController implements Initializable {
         if (location.length() < 3) {
             alert("Location is not long enough.  Min character length is 3");
         }
-        if (resultStart.after(resultEnd)) {
+        if (resultStart.isAfter(resultEnd)) {
             alert("Your appointment can not have an end date that is before the start date");
             return false;
             

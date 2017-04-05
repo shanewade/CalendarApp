@@ -7,7 +7,8 @@ package calapp;
 
 import java.net.URL;
 import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.time.*;
+import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.ResourceBundle;
@@ -68,15 +69,31 @@ private void getByWeekAppts(int week, int year) {
                    "INNER JOIN `customer` ON  customer.customerID = appointment.customerID\n" +
                    "WHERE  YEAR(start) = "+year+"\n" +
                    "AND    WEEK(start) = "+week+"" +
-                   " AND    createBy = '"+loggedInUser+"';";
+                   " AND    appointment.createdBy = '"+loggedInUser+"';";
                 
         ResultSet rs = DataConn.Query(query);
+           
+           DateTimeFormatter sqldf = DateTimeFormatter.ofPattern("yyy-MM-dd kk:mm:ss.S");
            if (!rs.isLast()) {
                int columnNumber = rs.findColumn("title");
            }
            Appointment appt;
            while(rs.next()) {
-               appt = new Appointment(rs.getString("title"), rs.getString("customer.customerName"), rs.getString("contact"), rs.getString("start"), rs.getString("end"));
+               String startString = rs.getString("start");
+               String endString = rs.getString("end");
+               
+               LocalDateTime ldtStartFromString = LocalDateTime.parse(startString, sqldf);
+               LocalDateTime ldtEndFromString = LocalDateTime.parse(endString, sqldf);
+               
+               ZonedDateTime zdtStartFromString = ldtStartFromString.atZone(ZoneId.of("UTC"));
+               ZonedDateTime zdtEndFromString = ldtEndFromString.atZone(ZoneId.of("UTC"));
+            
+               ZoneId newzid = ZoneId.systemDefault();
+               
+               ZonedDateTime newzdtStart = zdtStartFromString.withZoneSameInstant(newzid);
+               ZonedDateTime newzdtEnd = zdtEndFromString.withZoneSameInstant(newzid);
+               
+               appt = new Appointment(rs.getString("title"), rs.getString("customer.customerName"), rs.getString("contact"), newzdtStart.toLocalDateTime().toString(), newzdtEnd.toLocalDateTime().toString());
                data.add(appt);
                
            }
@@ -104,21 +121,36 @@ private void getByMonthAppts(int month, int year){
     
         isMonthlyView = true;
         try {
-                   String query =   "SELECT start, end, title , customer.customerName, contact  \n" +
-                   "FROM `appointment`\n" +
-                   "INNER JOIN `customer` ON  customer.customerID = appointment.customerID\n" +
-                   "WHERE  YEAR(start) = "+year+"\n" +
-                   "AND    MONTH(start) = "+month+"" +
-                   " AND    createBy = '"+loggedInUser+"';";
+                   String query =   "SELECT start\n"
+                              + ", end, title , customer.customerName\n"
+                              + ", contact FROM `appointment` INNER JOIN `customer` ON customer.customerID = appointment.customerID\n" +
+                              "WHERE  YEAR(start) = "+year+"\n" +
+                              "AND    MONTH(start) = "+month+"" +
+                              " AND    appointment.createdBy = '"+loggedInUser+"';";
                 
         ResultSet rs = DataConn.Query(query);
+           DateTimeFormatter sqldf = DateTimeFormatter.ofPattern("yyy-MM-dd kk:mm:ss.S");
            if (!rs.isLast()) {
+               int columnNumber = rs.findColumn("title");
            }
            Appointment appt;
            while(rs.next()) {
-               appt = new Appointment(rs.getString("title"), rs.getString("customer.customerName"), rs.getString("contact"), rs.getString("start"), rs.getString("end"));
-               data.add(appt);
+               String startString = rs.getString("start");
+               String endString = rs.getString("end");
                
+               LocalDateTime ldtStartFromString = LocalDateTime.parse(startString, sqldf);
+               LocalDateTime ldtEndFromString = LocalDateTime.parse(endString, sqldf);
+               
+               ZonedDateTime zdtStartFromString = ldtStartFromString.atZone(ZoneId.of("UTC"));
+               ZonedDateTime zdtEndFromString = ldtEndFromString.atZone(ZoneId.of("UTC"));
+            
+               ZoneId newzid = ZoneId.systemDefault();
+               
+               ZonedDateTime newzdtStart = zdtStartFromString.withZoneSameInstant(newzid);
+               ZonedDateTime newzdtEnd = zdtEndFromString.withZoneSameInstant(newzid);
+               
+               appt = new Appointment(rs.getString("title"), rs.getString("customer.customerName"), rs.getString("contact"), newzdtStart.toLocalDateTime().toString(), newzdtEnd.toLocalDateTime().toString());
+               data.add(appt);
            }
            
             titleColumn.setCellValueFactory(new PropertyValueFactory<>("apptTitle"));
