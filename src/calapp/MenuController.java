@@ -24,6 +24,9 @@ public class MenuController implements Initializable {
      @FXML private Button viewCustomers;
      @FXML private Button viewAppointments;
      @FXML private Button viewCalendar;
+     @FXML private Button reportAppointmentsPerMonth;
+     @FXML private Button reportScheduleByConsultant;
+     @FXML private Button reportCustomersWithNoRecentAppointments;
      
      
      
@@ -64,6 +67,17 @@ public class MenuController implements Initializable {
             System.err.println(e);
         }
     }
+    
+        private void launchConsultantPicker() {
+        try {
+            Control c = Control.getInstance();
+            Stage stage = c.getStage();
+            c.SetStage(stage);
+            c.SetPane("pickConsultant");
+        } catch (Exception e) {
+            System.err.println(e);
+        }
+    }
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         newCustomer.setOnAction((ActionEvent event) -> {
@@ -94,8 +108,16 @@ public class MenuController implements Initializable {
                e.printStackTrace();
            }
         });
+        
+        reportScheduleByConsultant.setOnAction((ActionEvent event) -> {
+            try {
+               launchConsultantPicker();
+            } catch (Exception e) {
+               e.printStackTrace();
+            }
+        });
+    
+    
+    
     }
-    
-    
-    
 }

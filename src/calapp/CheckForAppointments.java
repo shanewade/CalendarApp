@@ -37,7 +37,7 @@ public class CheckForAppointments {
     
 
     static void checkForUpcomingAppts(String loggedInUser) {
-        
+        System.err.println("Checking for appts!");
         ArrayList<Appointment> data = new ArrayList();
         try {
         String query =   "SELECT title, customer.customerName, contact, start, end "
