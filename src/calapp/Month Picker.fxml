@@ -1,18 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="183.0" prefWidth="317.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="playground.MonthPickerController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="165.0" prefWidth="229.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="calapp.MonthPickerController">
    <children>
-      <Pane layoutX="189.0" layoutY="92.0" prefHeight="200.0" prefWidth="200.0">
-         <children>
-            <DatePicker layoutX="-97.0" layoutY="15.0" />
-         </children>
-      </Pane>
+      <Text layoutX="59.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Select Month/Year:" />
+      <Button fx:id="runReport" layoutX="94.0" layoutY="118.0" mnemonicParsing="false" onAction="#runReport" text="Run" />
+      <ChoiceBox fx:id="monthSelector" layoutX="25.0" layoutY="75.0" prefHeight="27.0" prefWidth="80.0" />
+      <ChoiceBox fx:id="yearSelector" layoutX="127.0" layoutY="75.0" prefHeight="27.0" prefWidth="72.0" />
    </children>
-</AnchorPane>
+</Pane>

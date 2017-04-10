@@ -78,6 +78,28 @@ public class MenuController implements Initializable {
             System.err.println(e);
         }
     }
+        
+        private void launchMonthPicker() {
+        try {
+            Control c = Control.getInstance();
+            Stage stage = c.getStage();
+            c.SetStage(stage);
+            c.SetPane("pickMonth");
+        } catch (Exception e) {
+            System.err.println(e);
+        }
+    }
+        
+        private void launchCustomersWOAppts() {
+        try {
+            Control c = Control.getInstance();
+            Stage stage = c.getStage();
+            c.SetStage(stage);
+            c.SetPane("pickNoCusts");
+        } catch (Exception e) {
+            System.err.println(e);
+        }
+    }
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         newCustomer.setOnAction((ActionEvent event) -> {
@@ -112,6 +134,22 @@ public class MenuController implements Initializable {
         reportScheduleByConsultant.setOnAction((ActionEvent event) -> {
             try {
                launchConsultantPicker();
+            } catch (Exception e) {
+               e.printStackTrace();
+            }
+        });
+        
+        reportAppointmentsPerMonth.setOnAction((ActionEvent event) -> {
+            try {
+               launchMonthPicker();
+            } catch (Exception e) {
+               e.printStackTrace();
+            }
+        });
+        
+        reportCustomersWithNoRecentAppointments.setOnAction((ActionEvent event) -> {
+            try {
+               launchCustomersWOAppts();
             } catch (Exception e) {
                e.printStackTrace();
             }

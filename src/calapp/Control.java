@@ -153,6 +153,28 @@ public class Control {
                         stage.show();
                         break;
                 }
+                case "pickMonth":
+                {
+                     Parent root = FXMLLoader.load(getClass().getResource("Month Picker.fxml"));
+                        stage.close();
+                        scene = new Scene(root);
+                        stage.setScene(scene);
+                        stage.setTitle("Calendar Application");
+                        //Maximizewindow();
+                        stage.show();
+                        break;
+                }
+                case "pickNoCusts":
+                {
+                     Parent root = FXMLLoader.load(getClass().getResource("CustomersWithoutAppointments.fxml"));
+                        stage.close();
+                        scene = new Scene(root);
+                        stage.setScene(scene);
+                        stage.setTitle("Calendar Application");
+                        //Maximizewindow();
+                        stage.show();
+                        break;
+                }
                 
                 default:
                     break;
