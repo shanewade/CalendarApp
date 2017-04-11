@@ -129,6 +129,8 @@ public class NewAppointmentController implements Initializable {
         DateTimeFormatter df = DateTimeFormatter.ofPattern("yyyy-MM-dd kk:mm");
         LocalDateTime resultStart = LocalDateTime.parse(startDate, df);
         LocalDateTime resultEnd = LocalDateTime.parse(endDate, df);
+        GlobalDataStore gsd = GlobalDataStore.getInstance();
+        String loggedInUser = gsd.getLoggedInUser();
        
         if (title.length() < 2) {
             alert("Title is not long enough.  Min character length is 2");
@@ -162,7 +164,12 @@ public class NewAppointmentController implements Initializable {
             alert("Your appointment can not have an end date that is before the start date");
             return false;
             
-        } else {
+        } 
+        if (ValidateAppointmentTime.checkForConflicts(resultStart, resultEnd, loggedInUser)){
+            alert("Your appointment conflicts with an exsisting appointment");
+            return false;
+        }
+        else {
 
         return true;
         }
