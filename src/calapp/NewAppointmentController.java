@@ -169,10 +169,16 @@ public class NewAppointmentController implements Initializable {
             alert("Your appointment conflicts with an exsisting appointment");
             return false;
         }
+        
+        if (ValidateAppointmentTime.checkForBusinessHours(resultStart, resultEnd)){
+            alert("You can not schedule an appointment outside of business hours.");
+            return false;
+        }
         else {
 
         return true;
         }
+        
         
     }
     

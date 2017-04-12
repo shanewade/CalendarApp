@@ -7,12 +7,12 @@ package calapp;
 
 import java.sql.ResultSet;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.scene.control.cell.PropertyValueFactory;
 
 /**
  *
@@ -86,7 +86,28 @@ public static boolean checkForConflicts(LocalDateTime start, LocalDateTime end, 
 }
 
 
-private static LocalDateTime max(LocalDateTime ldt1, LocalDateTime ldt2){
+public static boolean checkForBusinessHours(LocalDateTime start, LocalDateTime end) {
+    
+    GlobalDataStore gsd = GlobalDataStore.getInstance();
+    
+    LocalTime businessStartTime = gsd.getBusinessStartTime();
+    LocalTime businessEndTime = gsd.getBusinessEndTime();
+    
+    LocalTime apptStartTime = start.toLocalTime();
+    LocalTime apptEndTime = end.toLocalTime();
+    
+    if (businessStartTime.isAfter(apptStartTime)){
+        return true;
+    }
+    if (businessEndTime.isBefore(apptEndTime)){
+        return true;
+    }
+    
+    return false;
+}
+
+
+    private static LocalDateTime max(LocalDateTime ldt1, LocalDateTime ldt2){
         if (ldt1.isAfter(ldt2)) {
             return ldt1;
         }    
@@ -103,4 +124,7 @@ private static LocalDateTime max(LocalDateTime ldt1, LocalDateTime ldt2){
             return ldt2;
         }
        }
+    
+    
+    
 }
